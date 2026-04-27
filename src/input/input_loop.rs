@@ -2,7 +2,7 @@
  * Get matrix
  * get operator
  * get matrix(?)
- * return
+ * repeat
  */
 
 use crate::{input::get_matrix::get_matrix, matrix::Matrix};
