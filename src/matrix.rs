@@ -16,4 +16,7 @@ impl Matrix {
     pub fn row(&self, i: usize) -> &Vec<f64> {
         return &self.data[i];
     }
+    pub fn row_mut(&mut self, i: usize) -> &mut Vec<f64> {
+        return &mut self.data[i];
+    }
 }
