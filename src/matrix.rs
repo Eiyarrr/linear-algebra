@@ -13,4 +13,7 @@ impl Matrix {
     pub fn columns(&self) -> usize {
         return self.data[0].len();
     }
+    pub fn row(&self, i: usize) -> &Vec<f64> {
+        return &self.data[i];
+    }
 }
