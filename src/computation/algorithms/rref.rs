@@ -13,7 +13,7 @@ pub fn rref(matrix: &mut Matrix) {
         // find row with a non-zero entry in current column
         let mut tmp = None;
         for i in r..rows {
-            if matrix.data[r][c] != 0.0 {
+            if matrix.data[i][c] != 0.0 {
                 tmp = Some(i);
                 break;
             }
@@ -30,10 +30,10 @@ pub fn rref(matrix: &mut Matrix) {
         row_swap(matrix, r, tmp);
 
         // normalize pivot point
-        normalize_pivot(matrix, tmp, c);
+        normalize_pivot(matrix, r, c);
 
         // set column to 0
-        eliminate_collumn(matrix, tmp, c);
+        eliminate_column(matrix, r, c);
 
         r += 1;
         c += 1;
@@ -45,7 +45,7 @@ fn normalize_pivot(matrix: &mut Matrix, row: usize, col: usize) {
     row_multiplication(&mut matrix.row_mut(row), 1.0 / pivot);
 }
 
-fn eliminate_collumn(matrix: &mut Matrix, row: usize, piv: usize) {
+fn eliminate_column(matrix: &mut Matrix, row: usize, piv: usize) {
     for r in 0..matrix.rows() {
         if r == row {
             continue;
