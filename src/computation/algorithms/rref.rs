@@ -11,23 +11,23 @@ pub fn rref(matrix: &mut Matrix) {
 
     while r < rows && c < cols {
         // find row with a non-zero entry in current column
-        let mut tmp = None;
+        let mut piv = None;
         for i in r..rows {
             if matrix.data[i][c] != 0.0 {
-                tmp = Some(i);
+                piv = Some(i);
                 break;
             }
         }
 
         // if no non-zero entires exist in collumn, increment by one
-        if tmp.is_none() {
+        if piv.is_none() {
             c += 1;
             continue;
         }
 
         // swap non-zero entry row into current row
-        let tmp = tmp.unwrap();
-        row_swap(matrix, r, tmp);
+        let piv = piv.unwrap();
+        row_swap(matrix, r, piv);
 
         // normalize pivot point
         normalize_pivot(matrix, r, c);
@@ -53,9 +53,9 @@ fn eliminate_column(matrix: &mut Matrix, row: usize, piv: usize) {
         if matrix.data[r][piv] == 0.0 {
             continue;
         }
-        let d = -matrix.data[r][piv] / matrix.data[row][piv];
+        let factor = -matrix.data[r][piv];
         for c in 0..matrix.columns() {
-            matrix.data[r][c] = matrix.data[r][c] + d * matrix.data[row][c];
+            matrix.data[r][c] += factor * matrix.data[row][c];
         }
     }
 }
